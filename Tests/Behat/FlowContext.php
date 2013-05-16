@@ -54,7 +54,7 @@ class FlowContext extends BehatContext {
 			// The new classloader needs warnings converted to exceptions
 		if (!defined('BEHAT_ERROR_REPORTING')) {
 			define('BEHAT_ERROR_REPORTING', E_ALL);
-			// Load ErrorException class, since it will be used in the Behat error handler
+				// Load ErrorException class, since it will be used in the Behat error handler
 			class_exists('Behat\Behat\Exception\ErrorException');
 		}
 		$bootstrap = new Bootstrap('Testing/Behat');
@@ -67,12 +67,12 @@ class FlowContext extends BehatContext {
 	}
 
 	/**
-     * @When /^I run the command "([^"]*)"$/
-     */
-    public function iRunTheCommand($command) {
+	 * @When /^I run the command "([^"]*)"$/
+	 */
+	public function iRunTheCommand($command) {
 		$this->lastCommandOutput = NULL;
 
-        $request = $this->objectManager->get('TYPO3\Flow\Cli\RequestBuilder')->build($command);
+		$request = $this->objectManager->get('TYPO3\Flow\Cli\RequestBuilder')->build($command);
 		$response = new \TYPO3\Flow\Cli\Response();
 
 		$dispatcher = $this->objectManager->get('TYPO3\Flow\Mvc\Dispatcher');
@@ -81,14 +81,14 @@ class FlowContext extends BehatContext {
 		$this->lastCommandOutput = $response->getContent();
 
 		$this->persistAll();
-    }
+	}
 
 	/**
-     * @Then /^I should see the command output "([^"]*)"$/
-     */
-    public function iShouldGetTheOutput($line) {
+	 * @Then /^I should see the command output "([^"]*)"$/
+	 */
+	public function iShouldGetTheOutput($line) {
 		\PHPUnit_Framework_Assert::assertContains($line, explode(PHP_EOL, $this->lastCommandOutput));
-    }
+	}
 
 	/**
 	 * @BeforeScenario @fixtures
@@ -113,7 +113,7 @@ class FlowContext extends BehatContext {
 			$schema = $em->getConnection()->getSchemaManager()->createSchema();
 			self::$createSchemaSql = $schema->toSql($em->getConnection()->getDatabasePlatform());
 
-			// FIXME Check if this is needed at all!
+				// FIXME Check if this is needed at all!
 			$proxyFactory = $em->getProxyFactory();
 			$proxyFactory->generateProxyClasses($em->getMetadataFactory()->getAllMetadata());
 		}
